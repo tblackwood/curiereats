@@ -1,7 +1,10 @@
+from django.conf import urls
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth import views as auth_views
+#from django.urls.conf import include
 from core import views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -11,6 +14,6 @@ urlpatterns = [
     path('sign-out/', auth_views.LogoutView.as_view(next_page="/")),
     path('sign-up/', views.sign_up),
 
-    path('customer/', views.customer_page),
-    path('courier/', views.courier_page)
+    path('customer/', include('core.customer.urls')),
+    path('courier/', include('core.courier.urls')),
 ]

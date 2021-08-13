@@ -7,14 +7,6 @@ from . import forms
 def home(request):
     return render(request, 'home.html')
 
-@login_required()
-def customer_page(request):
-    return render(request, 'home.html')
-
-@login_required()
-def courier_page(request):
-    return render(request, 'home.html')
-
 def sign_up(request):
     form = forms.SignUpForm()
     if request.method == "POST":
@@ -26,6 +18,9 @@ def sign_up(request):
             user = form.save(commit=False)
             user.username = email
             user.save()
+
+            # Send welcome email
+            
 
             login(request, user)
 
