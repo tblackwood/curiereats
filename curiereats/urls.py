@@ -1,3 +1,4 @@
+from os import name
 from django.conf import urls
 from django.contrib import admin
 from django.urls import path, include
@@ -14,6 +15,6 @@ urlpatterns = [
     path('sign-out/', auth_views.LogoutView.as_view(next_page="/")),
     path('sign-up/', views.sign_up),
 
-    path('customer/', include('core.customer.urls')),
-    path('courier/', include('core.courier.urls')),
+    path('customer/', include(('core.customer.urls', 'customer'))),
+    path('courier/', include(('core.courier.urls', 'courier'))),  
 ]
