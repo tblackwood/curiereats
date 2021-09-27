@@ -1,32 +1,192 @@
+
 {% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+
+<style>
+    
+* {
+    margin: 0;
+    padding: 0;
+}
+html,
+body,
+.container {
+  height: 100%;
+  
+}
+body{
+    /*background-position: bottom center*/;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    overflow: hidden;
+}
+
+
+
+.content {
+  box-sizing: border-box;
+  min-height: 100%;
+  padding-bottom: 90px;
+}
+
+.row-full{
+ width: 100vw;
+ position: relative;
+ margin-left: -50vw;
+ height: 100px;
+ left: 50%;
+}
+
+.content{
+    background-image: url("{% static 'img/slider-glob.png' %}");
+    background-position:bottom center; 
+    background-repeat:no-repeat; 
+}
+.lte-header{
+    z-index: 3;
+    position: relative;
+    margin: 0;
+    top: 5rem;
+    left: 2rem;
+}    
+.lte-header{
+    color: #ffc107;
+    font-size: 80px;
+    line-height: 1em;
+}    
+
+.lte-header span {
+    color: #fff;
+    color: var(--white);
+    line-height: 1em;
+}
+.card{
+    background-color: none !important;
+}
+
+.lte-btn {
+    padding: 22px 30px 22px;
+    font-size: 16px;
+    min-width: 260px;
+    color: black;
+    border-radius: 48px;
+}
+
+.lte-btn{
+    -webkit-background-clip: border-box !important;
+    -moz-background-clip: border-box !important;
+    background-clip: border-box !important;
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1);
+    -webkit-transition: background .25s,color .25s,border .25s !important;
+    -moz-transition: background .25s,color .25s,border .25s !important;
+    -o-transition: background .25s,color .25s,border .25s !important;
+    transition: background .25s,color .25s,border .25s !important;
+    -webkit-border-radius: 48px;
+    -moz-border-radius: 48px;
+}
+
+
+.lte-btn:hover {
+    color: #282932;
+    color: var(--black);
+    background-color: #fff;
+    background-color: var(--white);
+}
+
+.lte-btn:hover {
+    -webkit-transition-delay: .3s,0s,0s !important;
+    -moz-transition-delay: .3s,0s,0s !important;
+    -o-transition-delay: .3s,0s,0s !important;
+    transition-delay: .3s,0s,0s !important;
+}
+
+.col-50{
+    
+    width: 50%;
+}
+
+.img-home img{
+    margin-top: -300px;
+    margin-right: 100px;
+}
+
+</style>
+{% endblock %}
 {% block content%}
     <div class="container">
         
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="text-center mt-5 mb-5">
-                    Welcome
-                </h1>
+        <div class="row content row-full">
+            <div class="col-lg-12 mb-5">
+                <h1 class="lte-header"><span> CourierEats </span><br> Express Delivery</h1>
             </div>
-            <div class="col-lg-6 mb-6">
-                <div class="card">       
-                    <div class="card-body">
-                      <h5 class="card-title">Customer</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="{% url 'customer:home' %}" class="btn btn-danger">Log in</a>
+            {% if request.user.is_authenticated%}
+                {% if request.user.customer %}
+                <div class="row row-full">
+                    <div class="column col-50">
+                        <div class="home-button ml-5">
+                            <a href="{% url 'customer:home' %}" class="btn btn-warning lte-btn mr-2 mb-2">
+                                <i class="fas fa-user"></i>
+                                Log in like Customer
+                            </a>
+                            
                     </div>
-                </div>
-            </div>
+                  </div>
+                    <div class="column col-50 img-home">
+                       <img src="{% static 'img/slider-courier-mask.png' %}" class="attachment-full size-full" alt=""  sizes="(max-width: 1080px) 100vw, 1080px" width="800" height="600">
 
-            <div class="col-lg-6 mb-6">
-                <div class="card">       
-                    <div class="card-body">
-                      <h5 class="card-title">Courier</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <a href="{% url 'courier:home' %}" class="btn btn-danger">Log in</a>
+
                     </div>
                 </div>
-            </div>
+                {% endif %}
+            {% endif %}
+            
+            {% if request.user.is_authenticated%}
+                {% if request.user.courier %}
+                <div class="row row-full">
+                    <div class="column col-50">
+                        <div class="home-button ml-5">
+                            <a href="{% url 'courier:home' %}" class="btn btn-warning lte-btn mb-2">
+                                <i class="fas fa-truck"></i> Log in like Courier</a>
+                    </div>
+                  </div>
+                    <div class="column col-50 img-home">
+                       <img src="{% static 'img/slider-courier-mask.png' %}" class="attachment-full size-full" alt=""  sizes="(max-width: 1080px) 100vw, 1080px" width="800" height="600">
+
+
+                    </div>
+                </div>
+                {% endif %}
+            {% endif %}
+
+            {% if not request.user.is_authenticated%}
+                <div class="row row-full">
+                    <div class="column col-50">
+                        <div class="home-button ml-5">
+                            <a href="{% url 'customer:home' %}" class="btn btn-warning lte-btn mr-2 mb-2">
+                                <i class="fas fa-user"></i>
+                                Log in like Customer
+                            </a>
+                            <a href="{% url 'courier:home' %}" class="btn btn-warning lte-btn mb-2">
+                                <i class="fas fa-truck"></i> Log in like Courier</a>
+                    </div>
+                  </div>
+                    <div class="column col-50 img-home">
+                       <img src="{% static 'img/slider-courier-mask.png' %}" class="attachment-full size-full" alt=""  sizes="(max-width: 1080px) 100vw, 1080px" width="800" height="600">
+
+
+                    </div>
+                </div>
+                
+                
+            {% endif %}
+            
         </div>        
     </div>
 {% endblock %}

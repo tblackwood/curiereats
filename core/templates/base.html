@@ -1,25 +1,37 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home page</title>
+    <title>Welcome to CourierEats</title>
+
+    <link rel="shortcut icon" href="{% static 'img/logo.png' %}">
+
     {% load bootstrap4 %}
     {% bootstrap_css %}
     {% bootstrap_javascript jquery='full' %}
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.9.0/css/all.css">
+
     {% block head %}{% endblock %}
 </head>
-<body>
+<body style="background-image: url({% static 'img/slider-eclipse.png' %});">
     <nav class="navbar {% if not request.user.is_authenticated %} navbar-expand-lg 
      {% endif %} navbar-light bg-warning">
-        <a class="navbar-brand" href="/">Courier eats</a>
+
+        <a class="navbar-brand" href="/">
+          <img src=" {% static 'img/logo.png' %}" width="40" alt="">
+          Courier eats</a>
         {% if not request.user.is_authenticated %}
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-      
+        <div class="container">
+          
+        </div>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item {% if request.GET.next != '/courier/' %} active {% endif %}">
@@ -42,8 +54,28 @@
 
     {% block content %}{% endblock %} 
 
-    <footer class="text-center mt-5 mb-5">
+    <footer class="text-center mt-5 mb-5" style="color: white;">
         &copy; CourierEats
     </footer>
+
+    <script src="https://unpkg.com/bootoast@1.0.1/dist/bootoast.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bootoast@1.0.1/dist/bootoast.min.css">
+    
+    <script>
+      function toast(message, type){
+        bootoast.toast({
+          position: 'bottom-center',
+          success: 'ok-sign',
+          message,
+          type
+        })
+      }
+
+      {% if messages%}
+        {% for message in messages %}
+          toast('{{ message}}','{{ message.tags }}' );
+        {% endfor %}
+      {%endif%}
+    </script>
 </body>
 </html>

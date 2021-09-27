@@ -29,7 +29,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',]
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap4',
     'core.apps.CoreConfig',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'core.middleware.ProfileMiddleware',
 ]
 
 ROOT_URLCONF = 'curiereats.urls'
@@ -127,6 +129,8 @@ STATIC_URL = '/static/'
 
 LOGIN_URL = '/sign-in'
 LOGIN_REDIRECT_URL = '/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 
 EMAIL_BACKEND = os.getenv("EMAIL_BACKEND")
@@ -136,3 +140,33 @@ EMAIL_PORT = os.getenv("EMAIL_PORT")
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL")
+
+FIREBASE_ADMIN_CREDENTIAL = os.path.join(BASE_DIR, os.getenv("FIREBASE_ADMIN_CREDENTIAL"))
+
+FIREBAE_WEB_PUSH_TOKEN = os.getenv("FIREBAE_WEB_PUSH_TOKEN")
+
+STRIPE_API_PUBLIC_KEY = os.getenv("STRIPE_API_PUBLIC_KEY")
+STRIPE_API_SECRET_KEY = os.getenv("STRIPE_API_SECRET_KEY")
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
+
+PAYPAL_MODE=os.getenv("PAYPAL_MODE")
+PAYPAL_CLIENT_ID=os.getenv("PAYPAL_CLIENT_ID")
+PAYPAL_CLIENT_SECRET=os.getenv("PAYPAL_CLIENT_SECRET")
+
+NOTIFICATION_URL="https://fathomless-brushlands-12857.herokuapp.com/"
+
+ASGI_APPLICATION = "curiereats.asgi.application"
+
+# Channels
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
+
+# Activate Django Heroku
+import django_on_heroku
+django_on_heroku.settings(locals())

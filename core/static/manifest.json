@@ -1,0 +1,14 @@
+{
+    "short_name": "CourierEats",
+    "name": "Welcome to App",
+    "description": "The best place for shiping",
+    "icons":[
+        {
+            "src":"/static/img/logo.png",
+            "type":"/image/png",
+            "size": "459x359"
+        }
+    ],
+    "start_url":"/courier/",
+    "display":"standalone"
+}

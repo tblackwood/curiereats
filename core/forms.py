@@ -13,7 +13,7 @@ class SignUpForm(UserCreationForm):
         fields = ('email', 'first_name', 'last_name', 'password1', 'password2')
 
     def clean_email(self):
-        email = self.changed_data['email'].lower()
+        email = self.cleaned_data['email'].lower()
         if(User.objects.filter(email=email)):
             raise ValidationError("Email adress already exists")
         return email
