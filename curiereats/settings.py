@@ -154,7 +154,7 @@ PAYPAL_CLIENT_ID=os.getenv("PAYPAL_CLIENT_ID")
 PAYPAL_CLIENT_SECRET=os.getenv("PAYPAL_CLIENT_SECRET")
 
 NOTIFICATION_URL="https://fathomless-brushlands-12857.herokuapp.com/"
-
+#
 ASGI_APPLICATION = "curiereats.asgi.application"
 
 # Channels

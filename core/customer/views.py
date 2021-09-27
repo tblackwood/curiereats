@@ -139,6 +139,8 @@ def create_job_page(request):
         ] 
     ).exists()
 
+    
+
     if has_current_job:
         messages.warning(request, "You currently have a processing job")
         return redirect(reverse('customer:current_jobs'))
