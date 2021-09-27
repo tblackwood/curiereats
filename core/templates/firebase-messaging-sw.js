@@ -2,7 +2,7 @@ importScripts("https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js");
 importScripts("https://www.gstatic.com/firebasejs/8.2.1/firebase-messaging.js");
 
 firebase.initializeApp({
-    apiKey: "AIzaSyB7Flkipb68FWgcTwZB7jr16UMJbQxzYbQ",
+    apiKey: "{{ API_FIRE_BASE }}",
     authDomain: "curiereats.firebaseapp.com",
     projectId: "curiereats",
     storageBucket: "curiereats.appspot.com",
